@@ -3,9 +3,6 @@ package lb.hack.mshack.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 public class Profit {
     /**
@@ -16,13 +13,13 @@ public class Profit {
     /**
      * затараты на 1 канал
      */
-    @JsonProperty("channelCosts")
+    @JsonProperty("channel_costs")
     int channelCosts;
     /**
      * количество смс
      */
-    @JsonProperty("countSms")
-    int sms;
+    @JsonProperty("count_sms")
+    int countSms;
 
     @JsonProperty("formula")
     String formula;
@@ -33,7 +30,7 @@ public class Profit {
     /**
      * среднее значение прибыли
      */
-    @JsonProperty("avgProfit")
+    @JsonProperty("avg_profit")
     int avgProfit;
 
 }
