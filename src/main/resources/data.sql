@@ -9,7 +9,7 @@ VALUES ('user','user@admin.ru', 'User_Last', 'User_First','User_middle', '{noop}
 
 INSERT INTO USER_ROLES (USER_ID, ROLE_ID)
 VALUES (1,1),
-       (2,2);
+       (2,2),
        (3,2);
 
 

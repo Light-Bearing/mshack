@@ -10,9 +10,9 @@ import javax.script.ScriptException;
 public class ScriptManager {
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("graal.js");
 
-    public Object eval(String func, int arg) throws ScriptException {
+    public Object eval(String func, int arg1, int arg2) throws ScriptException {
         engine.eval(func);
-        return engine.eval("f(" + arg + ");");
+        return engine.eval("f(" + arg1 +", "+ arg2+");");
 
     }
 }
