@@ -1,5 +1,6 @@
 package lb.hack.mshack.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -10,17 +11,29 @@ public class Profit {
     /**
      * число абонентов
      */
-    int accounts;
+    @JsonProperty("count_accounts")
+    int countAccounts;
     /**
      * затараты на 1 канал
      */
+    @JsonProperty("channelCosts")
     int channelCosts;
     /**
      * количество смс
      */
+    @JsonProperty("countSms")
     int sms;
 
+    @JsonProperty("formula")
     String formula;
+
+    @JsonProperty("period")
     String period;
-    List<Balanse> items = new ArrayList();
+
+    /**
+     * среднее значение прибыли
+     */
+    @JsonProperty("avgProfit")
+    int avgProfit;
+
 }
