@@ -31,7 +31,7 @@ public class MainRestController {
     @GetMapping("/profit")
     public Object  profit() throws ScriptException {
 
-       return engine.eval("function f(arg) { return 5+arg; }", 1);
+       return engine.eval("function f(arg) { return 5+arg; }", 12);
 
     }
 
