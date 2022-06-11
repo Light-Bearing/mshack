@@ -11,10 +11,5 @@ public class Equation {
     private List<Param> paramList;
 
 
-    @Data
-    private static class Param {
-        private String name;
-        private String title;
-        private String type;
-    }
+
 }
