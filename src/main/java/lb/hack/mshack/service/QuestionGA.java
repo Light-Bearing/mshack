@@ -18,22 +18,19 @@ import java.util.stream.Collectors;
 public class QuestionGA {
     @Value("${ml.address}")
     private String url;
-
-    public List<Double> getGeneticResponse(List<Double> profit){
+    public String getGeneticResponse(List<Double> profit){
         final RestTemplate restTemplate =new RestTemplate();
         // create headers
         HttpHeaders headers = new HttpHeaders();
         // set `content-type` header
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String request = String.format("{" +
-                "  \"equation_inputs\": %s" +
-                "}",profit.stream().map(Object::toString).collect(Collectors.toList()));
+        String request = String.format("{\"equation_inputs\": %s}",profit.stream().
+                map(Object::toString)
+                .collect(Collectors.toList()));
         System.out.println(request);
         // build the request
         HttpEntity<String> entity = new HttpEntity<>(request, headers);
         // send POST request
-        String res = restTemplate.postForObject(url, entity, String.class);
-        System.out.println(res);
-        return null;
+        return restTemplate.postForObject(url, entity, String.class);
     }
 }

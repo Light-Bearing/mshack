@@ -3,6 +3,7 @@ package lb.hack.mshack.controller;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lb.hack.mshack.dto.Result;
 import lb.hack.mshack.message.request.Equation;
 import lb.hack.mshack.message.request.Parameter;
 import lb.hack.mshack.service.ModelService;
@@ -48,8 +49,8 @@ public class MainRestController {
     }
 
     @PostMapping("/setParameter")
-    public List<String> setParameter(@RequestBody List<Parameter> parameterList){
-        return modelService.setParameter(parameterList);
+    public ResponseEntity<Result> setParameter(@RequestBody List<Parameter> parameterList){
+        return ResponseEntity.ok(modelService.setParameter(parameterList));
     }
 
 }

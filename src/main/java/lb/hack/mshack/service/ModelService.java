@@ -1,5 +1,6 @@
 package lb.hack.mshack.service;
 
+import lb.hack.mshack.dto.Result;
 import lb.hack.mshack.entity.EquationEntity;
 import lb.hack.mshack.message.request.Equation;
 import lb.hack.mshack.message.request.Parameter;
@@ -14,5 +15,5 @@ public interface ModelService {
 
     EquationEntity deleteModel(Long id);
 
-    List<String> setParameter(List<Parameter> parameterList);
+    Result setParameter(List<Parameter> parameterList);
 }
