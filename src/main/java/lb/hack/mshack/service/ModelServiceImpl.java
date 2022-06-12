@@ -9,6 +9,7 @@ import lb.hack.mshack.utils.JavaScriptEngine;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class ModelServiceImpl implements ModelService {
 
     private EquationRepository equationRepository;
-
+    private QuestionGA questionGA;
     private JavaScriptEngine javaScriptEngine;
     @Override
     public List<EquationEntity> addModel(List<Equation> equationList) {
@@ -39,11 +40,22 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public List<String> setParameter(List<Parameter> parameterList){
-            return parameterList.stream()
-                    .map(el-> javaScriptEngine.eval(equationRepository.findById(el.getEquationId())
-                                    .orElseThrow().getEquation(),
-                                    el.getParam()))
-                    .collect(Collectors.toList());
+        List<String> collect = parameterList.stream()
+                .map(el -> javaScriptEngine.eval(equationRepository.findById(el.getEquationId())
+                                .orElseThrow().getEquation(),
+                        el.getParam()))
+                .collect(Collectors.toList());
+        System.out.println(collect);
+        //List<Double> parameters = collect.stream().map(el->).collect(Collectors.toList());
+        List<Double> parameters = new ArrayList<>();
+        parameters.add(Math.random());
+        parameters.add(Math.random());
+        parameters.add(Math.random());
+        parameters.add(Math.random());
+        parameters.add(Math.random());
+        List<Double> geneticResponse = questionGA.getGeneticResponse(parameters);
+        System.out.println(geneticResponse);
+        return null;
     }
 
     @Override

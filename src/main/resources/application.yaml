@@ -11,15 +11,7 @@ spring:
       default_batch_fetch_size: 20
       jdbc.batch_size: 20
   datasource:
-    #InMemory
-    #url: jdbc:h2:mem:ferz
-    #tcp: jdbc:h2:tcp://localhost:9092/mem:ferz
-    #Absolute
     url: jdbc:h2:file:./hack
-#    url: jdbc:h2:file:./hack
-    #tcp: jdbc:h2:tcp://localhost:9092/./hack
-    # Relative
-    #url: jdbc:h2:./db/ferz
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -27,24 +19,14 @@ spring:
   data.rest:
     basePath: /api
     returnBodyOnCreate: true
-  #  security:
-  #    user:
-  #      name: user
-  #      password: password
-  #      roles: USER
   logging:
     level:
       root: DEBUG
       lb.ferzshow.bootjava: DEBUG
-#      org.springframework.security.web.FilterChainProxy: DEBUG
-# Jackson Serialization Issue Resolver
-#  jackson:
-#    visibility.field: any
-#    visibility.getter: none
-#    visibility.setter: none
-#    visibility.is-getter: none
 app:
   jwtSecret: nftFourTask
   jwtExpiration: 86400
 server:
   port: 8081
+ml:
+  address: http://127.0.0.1:5000/json
