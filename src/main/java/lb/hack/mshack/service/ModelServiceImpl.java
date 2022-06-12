@@ -24,6 +24,7 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public List<EquationEntity> addModel(List<Equation> equationList) {
+        //Замена модели уравнений
         equationRepository.deleteAll();
         List<EquationEntity> equationEntityList = equationList.stream()
                 .map(el -> EquationEntity.builder()
@@ -41,13 +42,14 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
+    //выполнение расчета
     public Result setParameter(List<Parameter> parameterList) {
         List<String> collect = parameterList.stream()
+                //расчет модели с заданными параметрами
                 .map(el -> javaScriptEngine.eval(equationRepository.findById(el.getEquationId())
                                 .orElseThrow().getEquation(),
                         el.getParam())).collect(Collectors.toList());
-        System.out.println(collect);
-
+//подготовка зпроса в сервис подбора параметров генетическим алгоритмом
         List<Double> request = collect.stream()
                 .map(str -> Arrays.stream(str.substring(str.indexOf('[') + 1, str.length() - 1).split(","))
                         .map(String::trim)
@@ -55,9 +57,8 @@ public class ModelServiceImpl implements ModelService {
                         .reduce(Double::sum).orElse(0.))
                 .collect(Collectors.toList());
         String geneticResponse = questionGA.getGeneticResponse(request);
-        System.out.println(geneticResponse);
-
-        return new Result(collect.stream().map(el->el.substring(el.indexOf(")")+1)).collect(Collectors.toList()), geneticResponse);
+        //Выдача результата
+        return new Result(collect.stream().map(el -> el.substring(el.indexOf(")") + 1)).collect(Collectors.toList()), geneticResponse);
     }
 
     @Override

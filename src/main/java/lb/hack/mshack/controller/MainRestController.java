@@ -2,6 +2,7 @@ package lb.hack.mshack.controller;
 
 
 import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lb.hack.mshack.dto.Result;
 import lb.hack.mshack.message.request.Equation;
@@ -30,26 +31,27 @@ public class MainRestController {
         return new ResponseEntity<String>(headers, HttpStatus.FOUND);
     }
 
-    //return engine.eval("const f=(arg1,arg2)=>{var x = 5; return x*arg1+arg2;}", 1,2);
-
-
     @PostMapping("/model")
-    public ResponseEntity<?> setModel(@RequestBody List<Equation> equationList){
+    @Operation(description = "Установление действующей модели цифрового двойника")
+    public ResponseEntity<?> setModel(@RequestBody List<Equation> equationList) {
         return ResponseEntity.ok(modelService.addModel(equationList));
     }
 
     @GetMapping("model")
-    public ResponseEntity<?> getModel(){
+    @Operation(description = "Выдача модели цифрового двойника")
+    public ResponseEntity<?> getModel() {
         return ResponseEntity.ok(modelService.getModel());
     }
 
     @DeleteMapping("/model")
-    public ResponseEntity<?> deleteElementModel(@RequestParam Long id){
+    @Operation(description = "Удаление одного уравнения из модели цифрового двойника")
+    public ResponseEntity<?> deleteElementModel(@RequestParam Long id) {
         return ResponseEntity.ok(modelService.deleteModel(id));
     }
 
     @PostMapping("/setParameter")
-    public ResponseEntity<Result> setParameter(@RequestBody List<Parameter> parameterList){
+    @Operation(description = "Выполнение расчетов")
+    public ResponseEntity<Result> setParameter(@RequestBody List<Parameter> parameterList) {
         return ResponseEntity.ok(modelService.setParameter(parameterList));
     }
 

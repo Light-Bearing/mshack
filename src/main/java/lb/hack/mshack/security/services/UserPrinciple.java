@@ -29,7 +29,7 @@ public class UserPrinciple implements UserDetails {
 
     public Collection<? extends GrantedAuthority> authorities;
 
-        public static UserPrinciple build(User user) {
+    public static UserPrinciple build(User user) {
         List<GrantedAuthority> authorities = user
                 .getRoles()
                 .stream()

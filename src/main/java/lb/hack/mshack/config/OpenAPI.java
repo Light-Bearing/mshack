@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT"
 )
 @OpenAPIDefinition(
-        info = @Info(title = "MoscowHack", version = "0.0.1",description = "Программа для хакатона"),
+        info = @Info(title = "MoscowHack", version = "0.0.1", description = "Программа для хакатона"),
         security = @SecurityRequirement(name = "bearerAuth")
 )
 public class OpenAPI {

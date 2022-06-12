@@ -11,5 +11,4 @@ public class Equation {
     private List<Param> paramList;
 
 
-
 }

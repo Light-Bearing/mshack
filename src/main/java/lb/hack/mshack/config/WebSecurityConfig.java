@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/swagger-resources/**",
                         "/**/swagger-ui.html",
                         "/**/swagger-ui/**"
-                        ).permitAll()
+                ).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)

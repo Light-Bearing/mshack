@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CheckedUser {
-    private  Long id;
-    private  Boolean checked;
+    private Long id;
+    private Boolean checked;
 }

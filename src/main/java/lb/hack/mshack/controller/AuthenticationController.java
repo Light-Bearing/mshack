@@ -113,13 +113,12 @@ public class AuthenticationController {
 
         if (findUser != null) {
             List<Role> roles = roleRepository.findAll();
-            User updatedUser = request.updateUser(findUser,roles);
+            User updatedUser = request.updateUser(findUser, roles);
             updatedUser.setId(request.getId());
             userRepository.save(updatedUser);
 
             return new ResponseEntity<>(new ResponseMessage("User updated"), HttpStatus.OK);
-        }
-        else return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+        } else return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                 HttpStatus.BAD_REQUEST);
     }
 

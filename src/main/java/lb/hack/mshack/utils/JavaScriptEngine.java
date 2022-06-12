@@ -21,22 +21,21 @@ public class JavaScriptEngine {
         }
     }
 
-    public String eval(String equation, List<Pair> param)
-    {
+    public String eval(String equation, List<Pair> param) {
         try {
-            engine.eval("f = "+equation);
-            String[] params=equation.substring(equation.indexOf('(')+1,equation.indexOf(')')).split(",");
-            StringBuilder str= new StringBuilder();
+            engine.eval("f = " + equation);
+            String[] params = equation.substring(equation.indexOf('(') + 1, equation.indexOf(')')).split(",");
+            StringBuilder str = new StringBuilder();
             for (String parameter : params) {
                 String value = param.stream()
-                        .filter(el->el.getKey().equals(parameter))
+                        .filter(el -> el.getKey().equals(parameter))
                         .collect(Collectors.toList())
                         .get(0)
                         .getValue();
                 str.append(str.length() == 0 ? value : ("," + value));
             }
-            return engine.eval("f("+str+")").toString();
-        }catch (ScriptException e) {
+            return engine.eval("f(" + str + ")").toString();
+        } catch (ScriptException e) {
             throw new RuntimeException(e);
         }
     }

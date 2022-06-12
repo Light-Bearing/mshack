@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParamEquation extends BaseEntity{
+public class ParamEquation extends BaseEntity {
     private String name;
     private String title;
     private String type;

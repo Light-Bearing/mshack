@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 @Data
 public class SignUpdateForm {
 

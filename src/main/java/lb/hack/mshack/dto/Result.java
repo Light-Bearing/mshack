@@ -10,6 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Result {
-   private List<String> calculateResult;
-   private String recommendation;
+    private List<String> calculateResult;
+    private String recommendation;
 }

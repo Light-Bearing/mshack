@@ -1,7 +1,5 @@
 package lb.hack.mshack.message.request;
 
-import com.google.gson.JsonObject;
-
 import lombok.Data;
 
 import java.util.List;

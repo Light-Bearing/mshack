@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users",uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
         }),
@@ -38,7 +38,7 @@ public class User extends BaseEntity implements Serializable {
     private String email;
 
     @NotBlank
-    @Size(min = 2, max=50)
+    @Size(min = 2, max = 50)
     @Column(name = "username")
     private String username;
 
