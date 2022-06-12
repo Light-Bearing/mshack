@@ -28,7 +28,7 @@ public class JavaScriptEngine {
             StringBuilder str = new StringBuilder();
             for (String parameter : params) {
                 String value = param.stream()
-                        .filter(el -> el.getKey().equals(parameter))
+                        .filter(el -> el.getKey().equals(parameter.trim()))
                         .collect(Collectors.toList())
                         .get(0)
                         .getValue();
