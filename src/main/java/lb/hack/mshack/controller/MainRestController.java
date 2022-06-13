@@ -2,6 +2,7 @@ package lb.hack.mshack.controller;
 
 
 import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lb.hack.mshack.dto.Result;
 import lb.hack.mshack.dto.vk.Channel;
@@ -36,21 +37,25 @@ public class MainRestController {
 
 
     @PostMapping("/model")
+    @Operation(description = "Установление действующей модели цифрового двойника")
     public ResponseEntity<?> setModel(@RequestBody List<Equation> equationList) {
         return ResponseEntity.ok(modelService.addModel(equationList));
     }
 
     @GetMapping("model")
+    @Operation(description = "Выдача модели цифрового двойника")
     public ResponseEntity<?> getModel() {
         return ResponseEntity.ok(modelService.getModel());
     }
 
     @DeleteMapping("/model")
+    @Operation(description = "Удаление одного уравнения из модели цифрового двойника")
     public ResponseEntity<?> deleteElementModel(@RequestParam Long id) {
         return ResponseEntity.ok(modelService.deleteModel(id));
     }
 
     @PostMapping("/setParameter")
+    @Operation(description = "Выполнение расчетов")
     public Result setParameter(@RequestBody List<Parameter> parameterList) {
         return modelService.setParameter(parameterList);
     }
