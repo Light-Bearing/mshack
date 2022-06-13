@@ -28,5 +28,11 @@ app:
   jwtExpiration: 86400
 server:
   port: 8081
+channel:
+  vk:
+    url: https://api.vk.com/method/
+    version: v=5.131
+    token: "vk1.a.PR_4NeQOOZhNQThqMgOMHovaJo5FbpHhnzCAu6pjbvnUYce3R1d94NEdY_sLRCzaf-JAm4HaO1SaBaro1lbs47PCeuMMU21vOCjzi6qDV7-Ytd8Ct_SGDezwLvPHiFg6O78e2ScuvSInyNDviwbbW4BtV8S90qmM5RsAqVve6djsBvZi0fWhMU__CULkzSYO"
+
 ml:
   address: http://127.0.0.1:5000/json
