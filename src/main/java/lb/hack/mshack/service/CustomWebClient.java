@@ -25,10 +25,10 @@ public class CustomWebClient {
      * значение на 12.06.2022. Используется для сравнения с текущими значениями // todo вынести в базу
      */
     List<Channel> channels = Arrays.asList(
-            new Channel(1, "Valeri Chekalina", "vk.com", 971391, "18216993", false, false),
-            new Channel(2, "Ольга Бузова", "vk.com", 1500000, "32707600", false, false),
-            new Channel(3, "Ирина Дубцова", "vk.com", 64706, "55136424", false, false),
-            new Channel(4, "Елена Сажина", "vk.com", 129265, "287301056", false, false)
+            new Channel(1, "Valeri Chekalina", "vk.com", 971391, "18216993", false, false, "https://vk.com/id18216993"),
+            new Channel(2, "Ольга Бузова", "vk.com", 1500000, "32707600", false, false, "https://vk.com/id32707600"),
+            new Channel(3, "Ирина Дубцова", "vk.com", 64706, "55136424", false, false, "https://vk.com/id55136424"),
+            new Channel(4, "Елена Сажина", "vk.com", 129265, "287301056", false, false, "https://vk.com/id287301056")
     );
 
     public CustomWebClient(WebClient webClientA) {

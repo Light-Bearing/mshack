@@ -29,4 +29,9 @@ public class Channel {
      */
     private boolean down;
 
+    /**
+     * линк на страницу
+     */
+    private String link;
+
 }
