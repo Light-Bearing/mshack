@@ -3,10 +3,11 @@ package lb.hack.mshack.service;
 import lb.hack.mshack.dto.vk.Channel;
 import lb.hack.mshack.dto.vk.Users;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.Disposable;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Service
 
 public class CustomWebClient {
-    private final WebClient webClient;
+    RestTemplate restTemplate = new RestTemplate();
     @Value("${channel.vk.version}")
     private String vkApiVerson;
     @Value("${channel.vk.url}")
@@ -32,31 +33,27 @@ public class CustomWebClient {
             new Channel(4, "Елена Сажина", "vk.com", 129265, "287301056", false, false, "https://vk.com/id287301056")
     );
 
-    public CustomWebClient(WebClient webClientA) {
-        this.webClient = webClientA;
-    }
-
-    public Mono<Users> getFollowers(final String id) {
+    public Users getFollowers(final String id) {
         String method = "users.getFollowers";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        return webClient
-                .get()
-                .uri(String.join("", urlVk, method, "?", vkApiVerson, "&user_id=", id))
-                .headers(h -> h.setBearerAuth(token))
-                .retrieve()
-                .bodyToMono(Users.class);
+        String url = String.join("", urlVk, method, "?", vkApiVerson, "&user_id=", id);
+        return restTemplate.postForObject(url, entity, Users.class);
     }
-
 
     public List<Channel> getActualChannels() {
         channels.forEach(s -> {
-            Mono<Users> user = getFollowers(s.getInnerId());
-            Disposable subscribe = user.subscribe(i -> {
-                Integer count = i.getResponse().getCount();
-                s.setDown(s.getInvolvement().compareTo(count) >= 0);
-                s.setUp(s.getInvolvement().compareTo(count) < 0);
-                s.setInvolvement(count);
-            });
+            Users user = getFollowers(s.getInnerId());
+            Integer count = user.getResponse().getCount();
+            if (s.getInvolvement().compareTo(count) > 0) {
+                s.setDown(true);
+            } else if (s.getInvolvement().compareTo(count) < 0) {
+                s.setUp(true);
+            }
+            s.setInvolvement(count);
         });
         return channels;
     }

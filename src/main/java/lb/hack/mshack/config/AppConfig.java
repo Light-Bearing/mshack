@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.h2.tools.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.sql.SQLException;
 
@@ -18,8 +17,5 @@ public class AppConfig {
         return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
     }
 
-    @Bean
-    WebClient webClientA() {
-        return WebClient.builder().build();
-    }
+
 }
