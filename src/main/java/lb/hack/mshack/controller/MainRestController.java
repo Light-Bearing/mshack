@@ -60,8 +60,8 @@ public class MainRestController {
         return modelService.setParameter(parameterList);
     }
 
-    @Tag(description = "/channels", name = "Цифровые каналы продвижения")
     @GetMapping("/channels")
+    @Operation(description = "Цифровые каналы продвижения")
     public List<Channel> getChannels() {
         return client.getActualChannels();
     }
