@@ -5,6 +5,7 @@ import lb.hack.mshack.dto.vk.Users;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.Disposable;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
@@ -46,19 +47,18 @@ public class CustomWebClient {
                 .bodyToMono(Users.class);
     }
 
+
     public List<Channel> getActualChannels() {
         channels.forEach(s -> {
             Mono<Users> user = getFollowers(s.getInnerId());
-            Integer count = user.block().getResponse().getCount();
-            if (s.getInvolvement().compareTo(count) > 0) {
-                s.setDown(true);
-            } else if (s.getInvolvement().compareTo(count) < 0) {
-                s.setUp(true);
-            }
-            s.setInvolvement(count);
+            Disposable subscribe = user.subscribe(i -> {
+                Integer count = i.getResponse().getCount();
+                s.setDown(s.getInvolvement().compareTo(count) >= 0);
+                s.setUp(s.getInvolvement().compareTo(count) < 0);
+                s.setInvolvement(count);
+            });
         });
         return channels;
     }
-
 
 }
